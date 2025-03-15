@@ -9,8 +9,8 @@ This is a Python FastAPI project for my personal-dashboard backend.
 2. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
-   cd yourproject
+   git clone https://github.com/sangdovn/personal-dashboard-be.git
+   cd personal-dashboard
    ```
 
 3. Copy the environment variables:

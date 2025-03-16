@@ -1,6 +1,13 @@
-from pydantic_settings import BaseSettings
+from logging.config import dictConfig
+
 from pydantic import ConfigDict
-import os
+from pydantic_settings import BaseSettings
+
+from src.constants import LOGGING_CONFIG
+
+
+def setup_logging():
+    dictConfig(LOGGING_CONFIG)
 
 
 class Settings(BaseSettings):

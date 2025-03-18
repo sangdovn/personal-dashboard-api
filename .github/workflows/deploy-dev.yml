@@ -1,12 +1,12 @@
-name: Personal Dashboard API
+name: Deploy Personal Dashboard API Dev
 
 on:
   push:
     branches:
-      - master
+      - dev
   pull_request:
     branches:
-      - master
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -26,13 +26,13 @@ jobs:
         run: pip install -r src/requirements/requirements-dev.txt
 
       - name: Run Ruff (Lint)
-        run: ruff check .
+        run: ruff check src
 
       - name: Run Black (Format Code)
-        run: black --check .
+        run: black --check src
 
       - name: Run Isort (Sort Imports)
-        run: isort --check-only .
+        run: isort --check-only src
 
   test:
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: test
-    environment: production
+    environment: development
 
     steps:
       - name: Checkout repository
@@ -73,7 +73,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment: production
+    environment: development
 
     steps:
       - name: SSH into server and deploy
@@ -87,4 +87,4 @@ jobs:
             docker stop ${{ vars.APP_NAME }} || echo "No container to stop"
             docker rm ${{ vars.APP_NAME }} || echo "No container to remove"
             docker rmi ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_ENV }}-${{ vars.APP_VERSION }} || echo "No image to remove"
-            docker run -d --restart always --name ${{ vars.APP_NAME }} -p ${{ vars.HOST_PORT }}:${{ vars.CONTAINER_PORT }} -e ENV=production ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_ENV }}-${{ vars.APP_VERSION }}
+            docker run -d --restart always --name ${{ vars.APP_NAME }} -p ${{ vars.HOST_PORT }}:${{ vars.CONTAINER_PORT }} -e ENV=development ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_ENV }}-${{ vars.APP_VERSION }}

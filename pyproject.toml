@@ -1,2 +1,29 @@
+[tool.ruff]
+# Specify ruff configuration
+lint.extend-select = ["E", "W", "F", "B"]
+lint.ignore = []
+# Set the source folder for ruff
+lint.select = ["E", "W", "F", "B"]
+exclude = [
+    ".venv",
+    "build",
+    "dist",
+    "tests",
+]
+
+[tool.black]
+exclude = '''
+/(\.venv|\.venv-dev|\.git|\.tox|\.nox|\.coverage|build|dist)/
+'''
+
 [tool.isort]
 profile = "black"
+skip = [
+    ".venv",
+    ".venv-dev",
+    "build",
+    "dist"
+]
+
+[tool.pytest.ini_options]
+continue_on_collection_errors = true

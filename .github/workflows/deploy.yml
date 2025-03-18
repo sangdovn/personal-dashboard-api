@@ -32,7 +32,7 @@ jobs:
         run: black --check .
 
       - name: Run Isort (Sort Imports)
-        run: isort --check-only src tests
+        run: isort --check-only .
 
   test:
     runs-on: ubuntu-latest

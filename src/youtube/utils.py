@@ -35,8 +35,8 @@ def json3_to_text(json3_str: str):
                     texts.append(text.strip())
 
         return " ".join(texts)
-    except json.JSONDecodeError:
-        raise ValueError("Invalid JSON3 format")
+    except json.JSONDecodeError as e:
+        raise ValueError("Invalid JSON3 format") from e
 
 
 def transcript_to_text(transcript, is_translated) -> str:

@@ -62,17 +62,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build --no-cache -t "${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest" .
+        run: docker build --no-cache -t ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest .
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: docker push "${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest"
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    environment: production
 
     steps:
       - name: SSH into server and deploy
@@ -83,12 +84,12 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-            docker pull "${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest"
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest
 
             # Stop and remove old container and image
             docker stop ${{ vars.APP_NAME }} || echo "No container to stop"
             docker rm ${{ vars.APP_NAME }} || echo "No container to remove"
-            docker rmi "${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest" || echo "No image to remove"
+            docker rmi ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest || echo "No image to remove"
 
             # Run new container
             docker run -d --restart always --name ${{ vars.APP_NAME }} -p ${{ vars.HOST_PORT }}:${{ vars.CONTAINER_PORT }} -e ENV=production ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:latest

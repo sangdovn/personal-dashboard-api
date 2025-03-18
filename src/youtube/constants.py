@@ -158,3 +158,10 @@ class LanguageCode(Enum):
     YIDDISH = "yi"
     YORUBA = "yo"
     ZULU = "zu"
+
+
+class ErrorMessages:
+    INVALID_YOUTUBE_URL = "Invalid YouTube URL."
+    INVALID_LANGUAGE_CODE = "Invalid language code."
+    TRANSCRIPT_RETRIEVAL_FAILURE = "Failed to retrieve transcript."
+    TRANSCRIPT_NOT_FOUND = "Transcript not found."

@@ -26,4 +26,5 @@ skip = [
 ]
 
 [tool.pytest.ini_options]
-continue_on_collection_errors = true
+testpaths = ["tests"]
+python_files = "test_*.py"

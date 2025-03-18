@@ -25,7 +25,7 @@ def get_transcript(video_url: str, lang: Optional[str]):
         transcript = get_transcript_ytt_api(video_url, lang)
         return transcript
     except Exception as e:
-        logger.error(f"Failed to retrieve transcript for language '{lang}': {e}")
+        logger.error(e)
         raise TranscriptRetrievalException() from e
 
 

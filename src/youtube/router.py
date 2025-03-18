@@ -13,4 +13,8 @@ async def read_transcript(
     lang: Optional[str] = Query(None),
 ):
     transcript = get_transcript(video_url, lang)
-    return transcript if transcript else "No transcript available"
+    return (
+        {"transcript": transcript}
+        if transcript
+        else {"transcript": "No transcript available"}
+    )

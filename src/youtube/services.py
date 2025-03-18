@@ -1,8 +1,8 @@
 import logging
 from typing import Optional
 
-from youtube_transcript_api import YouTubeTranscriptApi
 import yt_dlp
+from youtube_transcript_api import YouTubeTranscriptApi
 
 from src.youtube.constants import LanguageCode
 from src.youtube.exceptions import (
@@ -73,17 +73,17 @@ def get_transcript_ytt_api(video_url: str, lang: Optional[str]):
 
 def get_video_transcript(video_url):
     ydl_opts = {
-        'skip_download': True,
-        'writesubtitles': True,
-        'subtitleslangs': ['en'],  # Specify the language of the subtitles
+        "skip_download": True,
+        "writesubtitles": True,
+        "subtitleslangs": ["en"],  # Specify the language of the subtitles
     }
-    
+
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(video_url, download=False)
-        subtitles = info_dict.get('subtitles', {})
-        
-        if 'en' in subtitles:
-            transcript = subtitles['en']
+        subtitles = info_dict.get("subtitles", {})
+
+        if "en" in subtitles:
+            transcript = subtitles["en"]
             return transcript
         else:
             return "No transcript available for this video."

@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     secret_key: str
     debug: bool = False
 
-    model_config = ConfigDict(env_file=f".env")
+    model_config = ConfigDict(env_file=".env")
 
 
 settings = Settings()

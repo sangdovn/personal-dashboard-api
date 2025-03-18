@@ -11,9 +11,6 @@ def setup_logging():
 
 
 class Settings(BaseSettings):
-    database_url: str
-    secret_key: str
-    debug: bool = False
 
     model_config = ConfigDict(env_file=".env")
 

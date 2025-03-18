@@ -5,7 +5,7 @@ FROM python:3.12-alpine
 WORKDIR /app
 
 # Copy and install dependencies first for better caching
-COPY requirements.txt .
+COPY ./src/requirements/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application files

@@ -11,18 +11,25 @@ def setup_logging():
             "disable_existing_loggers": False,
             "formatters": {
                 "default": {
-                    "format": "%(asctime)s - %(levelname)s - %(filename)s - %(message)s"
+                    "format": "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
                 }
             },
             "handlers": {
                 "console": {
                     "class": "logging.StreamHandler",
                     "formatter": "default",
+                    "level": "DEBUG",
                 }
             },
             "loggers": {
-                "uvicorn": {"handlers": ["console"], "level": "INFO"},
-                "app_logger": {"handlers": ["console"], "level": "INFO"},
+                "uvicorn": {
+                    "handlers": ["console"],
+                    "level": "DEBUG",
+                },
+                "app_logger": {
+                    "handlers": ["console"],
+                    "level": "DEBUG",
+                },
             },
         }
     )

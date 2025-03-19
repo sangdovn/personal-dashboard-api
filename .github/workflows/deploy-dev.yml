@@ -59,6 +59,11 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            DOCKER_IMAGE="${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ github.ref_name }}-${{ vars.APP_VERSION }}"
+            CONTAINER_NAME="${{ vars.APP_NAME }}-${{ github.ref_name }}-${{ vars.APP_VERSION }}"
+            HOST_PORT=8001
+            CONTAINER_PORT=8000
+
             docker pull $DOCKER_IMAGE
             docker stop $CONTAINER_NAME
             docker rm $CONTAINER_NAME

@@ -27,6 +27,12 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_ENV }}-${{ vars.APP_VERSION }}
 
+      - name: Logout from Docker Hub
+        run: docker logout
+
+      - name: Clean up
+        run: docker system prune -a -f
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -40,7 +46,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_ENV }}-${{ vars.APP_VERSION }}
             docker stop ${{ vars.APP_NAME }} || echo "No container to stop"
             docker rm ${{ vars.APP_NAME }} || echo "No container to remove"

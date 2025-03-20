@@ -1,0 +1,9 @@
+services:
+  api:
+    container_name: personal-dashboard-api-dev
+    build: .
+    ports:
+      - 8001:8000
+    volumes:
+      - .:/app
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload

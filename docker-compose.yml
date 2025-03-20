@@ -1,0 +1,6 @@
+services:
+  api:
+    container_name: personal-dashboard-api
+    build: .
+    ports:
+      - 8000:8000

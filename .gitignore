@@ -1,37 +1,11 @@
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.db
 
 # Virtual environment
-env/
-venv/
 .venv/
-.venv*
-
-# FastAPI-specific
-*.log
-*.sqlite3
-*.sqlite
 
 # IDEs and Editors
 .vscode/
-.idea/
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Docker files
-.docker/
-docker-compose.override.yml
 
 # Environment variables
 .env
-.env.local
-.env.*.local
-
-# Other sensitive files
-*.env

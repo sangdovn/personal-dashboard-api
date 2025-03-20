@@ -55,6 +55,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             export IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }}-${{ github.ref_name }}"
+            export CONTAINER_NAME="${{ vars.APP_NAME }}-${{ github.ref_name }}"
+
             cd ${{ secrets.SERVER_WORK_DIR }}
+
             docker compose -f docker-compose-dev.yml pull
             docker compose -f docker-compose-dev.yml up -d

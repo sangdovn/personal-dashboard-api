@@ -4,4 +4,3 @@ services:
     image: ${IMAGE_NAME}
     ports:
       - 8001:8000
-    networks: "none"

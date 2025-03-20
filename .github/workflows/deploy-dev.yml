@@ -69,6 +69,7 @@ jobs:
 
             cd ${{ secrets.SERVER_WORK_DIR }}
             docker compose down
+            docker rm -f $CONTAINER_NAME
             docker rmi -f $IMAGE_NAME
             docker compose -f docker-compose-dev.yml pull
             docker compose -f docker-compose-dev.yml up -d

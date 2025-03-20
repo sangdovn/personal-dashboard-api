@@ -45,8 +45,8 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            rm -rf ${{ secrets.SERVER_WORK_DIR }}
-            mkdir -p ${{ secrets.SERVER_WORK_DIR }}
+            mkdir -p ${{ secrets.SERVER_WORK_DIR }} || true
+            rm -rf ${{ secrets.SERVER_WORK_DIR }}/* ${{ secrets.SERVER_WORK_DIR }}/.* || true
 
       - name: Copy docker-compose-dev.yml to server
         uses: appleboy/scp-action@v0.1.7

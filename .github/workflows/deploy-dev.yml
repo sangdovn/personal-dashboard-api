@@ -56,5 +56,5 @@ jobs:
           script: |
             export IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.APP_NAME }}:${{ vars.APP_VERSION }}-${{ github.ref_name }}"
             cd ${{ secrets.SERVER_WORK_DIR }}
-            docker-compose -f docker-compose-dev.yml pull
+            docker compose -f docker-compose-dev.yml pull
             docker compose -f docker-compose-dev.yml up -d

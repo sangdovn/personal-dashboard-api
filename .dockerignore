@@ -1,14 +1,9 @@
-# Ignore Python cache and compiled files
 __pycache__/
-
-# Git files
-.git/
-
-# Docker-related files
-docker-*.override.yml
-
-# IDEs and editors
-.vscode/
-
-# Ignore environment variable files
+venv*/
+.venv*/
 .env*
+.git*
+docker*.yml
+.dockerignore
+Dockerfile
+.vscode/

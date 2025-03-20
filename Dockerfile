@@ -32,4 +32,4 @@ ENV PATH=/venv/bin:$PATH
 COPY . .
 
 # Run FastAPI with uvicorn
-CMD uvicorn src.main:app --host 0.0.0.0 --port 8000
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

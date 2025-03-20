@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "docker-compose-dev.yml"
-          target: "${{ secrets.SERVER_WORK_DIR }}/"
+          target: ${{ secrets.SERVER_WORK_DIR }}
 
       - name: SSH to server and deploy
         uses: appleboy/ssh-action@v1

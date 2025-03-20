@@ -1,6 +1,6 @@
 services:
   api:
-    container_name: personal-dashboard-api
-    build: .
+    container_name: ${{IMAGE_NAME}}
+    image: ${IMAGE_NAME}
     ports:
       - 8000:8000
